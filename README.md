@@ -1,6 +1,8 @@
 # HJ_Introduction
 게임 개발 입문 개인 과제
 
+에셋 활용 : https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360
+
 
 ## 씬(Scene) 구성 
 ### 👾 IntroScene 
