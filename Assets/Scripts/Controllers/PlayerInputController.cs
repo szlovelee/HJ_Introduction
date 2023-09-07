@@ -8,20 +8,21 @@ public class PlayerInputController : HJ_CharacterController
 
     internal Camera _camera;
     GameManager gameManager;
-    CharacterSettingController charSettingController;
+    GameObject playerObject;
 
     private void Awake()
     {
         SceneController.SceneChange += FindingCamera;
         gameManager = GameManager.Instance;
-        charSettingController = gameManager.characterSettingController;
         _camera = Camera.main;
     }
 
     private void Start()
     {
-        charSettingController.OnPanelOpen += PauseMovement;
-        charSettingController.OnPanelClose += ResumeMovement;
+        playerObject = gameManager.playerObject;
+        gameManager.characterSettingController.OnPanelOpen += PauseMovement;
+        gameManager.characterSettingController.OnPanelClose += ResumeMovement;
+        gameManager.characterSettingController.OnCharacterChange += PlayerSetting;
     }
 
 
@@ -38,7 +39,7 @@ public class PlayerInputController : HJ_CharacterController
     private void OnMove(InputValue value)
     {
         Vector2 moveInput = value.Get<Vector2>().normalized;
-        CallMoveEvent(moveInput);
+        gameObject.GetComponent<HJ_CharacterController>().CallMoveEvent(moveInput);
     }
 
     private void OnLook(InputValue value)
@@ -46,16 +47,22 @@ public class PlayerInputController : HJ_CharacterController
         Vector2 mousePos = value.Get<Vector2>();
         Vector2 worldPos = _camera.ScreenToWorldPoint(mousePos);
 
-        Vector2 direction = (worldPos - (Vector2)transform.position).normalized;
+        Vector2 direction = (worldPos - (Vector2)playerObject.transform.position).normalized;
 
-        if(direction.magnitude > 0.9f)
+        if (direction.magnitude > 0.9f)
         {
-            CallLookEvent(direction);
+            gameObject.GetComponent<HJ_CharacterController>().CallLookEvent(direction);
         }
+
     }
 
     internal void FindingCamera()
     {
         _camera = Camera.main;
+    }
+
+    void PlayerSetting(Player.Type type)
+    {
+        playerObject = gameManager.playerObject;
     }
 }

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     internal Player player;
     internal GameObject playerObject;
+    internal HJ_CharacterController characterController;
 
     [SerializeField] private InputField input;
     [SerializeField] private GameObject nameInputpanel;
@@ -38,16 +39,18 @@ public class GameManager : MonoBehaviour
     internal Player.Type? type;
     public bool pinkIsSelected = false;
     public bool blueIsSelected = false;
-    [SerializeField] GameObject pinkPrefab;
-    [SerializeField] GameObject bluePrefab;
+    [SerializeField] internal GameObject pinkPrefab;
+    [SerializeField] internal GameObject bluePrefab;
 
     //캐릭터 수정 단계에 필요
-    public CharacterSettingController characterSettingController;
+    internal CharacterSettingController characterSettingController;
+    
 
 
     void Start()
     {
         characterSettingController = new CharacterSettingController();
+        characterController = new HJ_CharacterController();
     }
 
     public void NameInput()
@@ -71,12 +74,14 @@ public class GameManager : MonoBehaviour
         if (type != null)
         {
             player = new Player(inputName, type.Value);
-            SceneController.ToMainScene();
 
 
             if (type == Player.Type.Pink) playerObject = Instantiate(pinkPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             else playerObject = Instantiate(bluePrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            
             DontDestroyOnLoad(playerObject);
+            SceneController.ToMainScene();
+            characterSettingController.CallCharacterChange(player.CharType);
 
         }
     }

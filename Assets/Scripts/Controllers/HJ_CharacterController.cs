@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HJ_CharacterController : MonoBehaviour
+public class HJ_CharacterController : MonoBehaviour 
 {
-    public event Action<Vector2> OnMoveEvent;
-    public event Action<Vector2> OnLookEvent;
+    internal event Action<Vector2> OnMoveEvent;
+    internal event Action<Vector2> OnLookEvent;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void CallMoveEvent(Vector2 direction)
     {

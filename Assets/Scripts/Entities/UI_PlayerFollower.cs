@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI_PlayerFollower : MonoBehaviour
 {
-    GameManager gameManagerInstance;
+    GameManager gameManager;
     GameObject player;
     Camera mainCamera;
     public Vector3 offset;
@@ -15,12 +15,14 @@ public class UI_PlayerFollower : MonoBehaviour
 
     void Start()
     {
-        gameManagerInstance = GameManager.Instance;
-        player = gameManagerInstance.playerObject;
-        mainCamera = player.GetComponent<PlayerInputController>()._camera;
+        gameManager = GameManager.Instance;
+        player = gameManager.playerObject;
+        mainCamera = Camera.main;
         rectTransform = GetComponent<RectTransform>();
         name = GetComponent<Text>();
-        name.text = gameManagerInstance.player.Name;
+        name.text = gameManager.player.Name;
+        gameManager.characterSettingController.OnCharacterChange += PlayerSetting;
+        
     }
 
     void LateUpdate()
@@ -40,5 +42,10 @@ public class UI_PlayerFollower : MonoBehaviour
         Vector2 anchoredPosition = screenPosition - new Vector2(canvas.pixelRect.width / 2, canvas.pixelRect.height / 2);
 
         rectTransform.anchoredPosition = anchoredPosition;
+    }
+
+    void PlayerSetting(Player.Type type)
+    {
+        player = gameManager.playerObject;
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class CharacterSettingController
 {
@@ -9,7 +11,7 @@ public class CharacterSettingController
 
     public event Action OnPanelOpen;
     public event Action OnPanelClose;
-
+    internal event Action<Player.Type> OnCharacterChange;
 
     internal void CallPanelOpen()
     {
@@ -20,5 +22,10 @@ public class CharacterSettingController
     {
         OnPanelClose?.Invoke();
     }
-   
+
+    internal void CallCharacterChange(Player.Type type)
+    {
+        OnCharacterChange?.Invoke(type);
+    }
+
 }
