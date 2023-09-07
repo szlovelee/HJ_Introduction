@@ -7,6 +7,7 @@
 - 이름 설정 : 2 ~ 10자 사이의 이름 설정
 - 캐릭터 선택 : Pink와 Blue 중 선택 가능. 호버 및 선택 시 표시등 켜짐. 선택 전환 가능
 
+![제목-없는-동영상-Clipchamp로-제작-_4_](https://github.com/szlovelee/HJ_Introduction/assets/77392694/9d297cfe-8f5e-44e2-9f64-7d830c78572b)
 
 ### 🤖 MainScene
 - 복도, 작은 룸, 그리고 메인 룸으로 구성
