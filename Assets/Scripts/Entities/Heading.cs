@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Heading : MonoBehaviour
 {
-
-    private HJ_CharacterController _controller;
-    private SpriteRenderer _mainSpriteRenderer;
+    GameManager gameManager;
+    SpriteRenderer _mainSpriteRenderer;
+    GameObject player;
 
 
     private void Awake()
     {
-        _controller = GetComponent<HJ_CharacterController>();
-        _mainSpriteRenderer = transform.Find("MainSprite").GetComponent<SpriteRenderer>();
+        gameManager = GameManager.Instance;
     }
 
     private void Start()
     {
-        _controller.OnLookEvent += Look;
+        player = gameManager.playerObject;
+        _mainSpriteRenderer = player.transform.Find("MainSprite").GetComponent<SpriteRenderer>();
+        gameObject.GetComponent<HJ_CharacterController>().OnLookEvent += Look;
+        gameManager.characterSettingController.OnCharacterChange += PlayerSetting;
     }
 
     private void Look(Vector2 direction)
@@ -25,5 +27,10 @@ public class Heading : MonoBehaviour
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         _mainSpriteRenderer.flipX = Mathf.Abs(rotZ) > 90f;
+    }
+    void PlayerSetting(Player.Type type)
+    {
+        player = gameManager.playerObject;
+        _mainSpriteRenderer = player.transform.Find("MainSprite").GetComponent<SpriteRenderer>();
     }
 }

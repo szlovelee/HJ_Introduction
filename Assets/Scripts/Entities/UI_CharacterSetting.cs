@@ -10,16 +10,19 @@ public class UI_CharacterSetting : MonoBehaviour
     [SerializeField] Image profile;
     [SerializeField] GameObject settingPanel;
 
+    GameManager gameManager;
     CharacterSettingController controller;
 
     private void Awake()
     {
-        controller = GameManager.Instance.characterSettingController;
+        gameManager = GameManager.Instance;
+        controller = gameManager.characterSettingController;
     }
     private void Start()
     {
         controller.OnPanelOpen += PanelOpen;
         controller.OnPanelClose += PanelClose;
+        controller.OnCharacterChange += SelectCharacter;
     }
 
     void PanelOpen()
@@ -39,7 +42,17 @@ public class UI_CharacterSetting : MonoBehaviour
 
         CharacterSettingController.isSettingPanelOpen = false;
         settingPanel.SetActive(false);
-    }  
+    }
+
+    void SelectCharacter(Player.Type type)
+    {
+        if (type == gameManager.player.CharType) return;
+        Vector3 playerPos = gameManager.playerObject.transform.position;
+        gameManager.player.CharType = type;
+        Destroy(gameManager.playerObject);
+        gameManager.playerObject = (type == Player.Type.Pink) ? Instantiate(gameManager.pinkPrefab, playerPos, Quaternion.identity) : Instantiate(gameManager.bluePrefab, playerPos, Quaternion.identity);
+        DontDestroyOnLoad(gameManager.playerObject);
+    }
 
 
 }

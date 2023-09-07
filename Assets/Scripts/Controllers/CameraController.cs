@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : HJ_CharacterController
+public class CameraController : MonoBehaviour
 {
-    GameManager gameManagerInstance;
+    GameManager gameManager;
     GameObject player;
     private void Awake()
     {
@@ -14,8 +14,9 @@ public class CameraController : HJ_CharacterController
 
     private void Start()
     {
-        gameManagerInstance = GameManager.Instance;
-        player = gameManagerInstance.playerObject;
+        gameManager = GameManager.Instance;
+        player = gameManager.playerObject;
+        gameManager.characterSettingController.OnCharacterChange += PlayerSetting;
     }
 
     private void Update()
@@ -32,5 +33,10 @@ public class CameraController : HJ_CharacterController
         else y = 8;
 
         transform.position = new Vector3 (x, y, -10);
+    }
+
+    void PlayerSetting(Player.Type type)
+    {
+        player = gameManager.playerObject;
     }
 }
