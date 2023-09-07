@@ -17,3 +17,5 @@
 #### UI
 - 미니맵: 캐릭터의 이동을 보다 넓은 시야로 확인할 수 있는 미니맵 추가
 - 프로필 설정 : 프로필 아이콘 클릭 시 이름 및 캐릭터 변경 패널 오픈 (이름 및 캐릭터 변경 적용 구현 중)
+
+![ezgif com-video-to-gif](https://github.com/szlovelee/HJ_Introduction/assets/77392694/f7ff30d0-812d-4c5c-8dfa-616da4445e2f)
