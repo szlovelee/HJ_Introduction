@@ -7,11 +7,32 @@ public class PlayerInputController : HJ_CharacterController
 {
 
     internal Camera _camera;
+    GameManager gameManager;
+    CharacterSettingController charSettingController;
 
     private void Awake()
     {
         SceneController.SceneChange += FindingCamera;
+        gameManager = GameManager.Instance;
+        charSettingController = gameManager.characterSettingController;
         _camera = Camera.main;
+    }
+
+    private void Start()
+    {
+        charSettingController.OnPanelOpen += PauseMovement;
+        charSettingController.OnPanelClose += ResumeMovement;
+    }
+
+
+    private void PauseMovement()
+    {
+        gameObject.GetComponent<PlayerInput>().enabled = false;
+    }
+
+    private void ResumeMovement()
+    {
+        gameObject.GetComponent<PlayerInput>().enabled = true;
     }
 
     private void OnMove(InputValue value)

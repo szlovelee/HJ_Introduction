@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MinimapCameraController : HJ_CharacterController
 {
-    GameManager gameManagerInstance;
+    GameManager gameManager;
     GameObject player;
 
-    private void Start()
+    private void Awake()
     {
-        gameManagerInstance = GameManager.Instance;
-        player = gameManagerInstance.playerObject;
+        gameManager = GameManager.Instance;
+        player = gameManager.playerObject;
     }
 
     private void Update()

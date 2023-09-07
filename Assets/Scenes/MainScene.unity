@@ -11379,7 +11379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profile_bg: {fileID: 956800072}
   profile: {fileID: 195760519}
-  minimap: {fileID: 1637967675}
   settingPanel: {fileID: 1415008684}
 --- !u!114 &452524108
 MonoBehaviour:
@@ -26254,6 +26253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637967676}
+  - component: {fileID: 1637967677}
   m_Layer: 5
   m_Name: Minimap
   m_TagString: Untagged
@@ -26284,6 +26284,21 @@ RectTransform:
   m_AnchoredPosition: {x: -70, y: 70}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1637967677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637967675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7410bb1c362d1441ade74aa62f994cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimapBorder: {fileID: 575262300}
+  minimapRenderer: {fileID: 2058019778}
+  playerPos: {fileID: 1575116692}
 --- !u!1 &1717726186
 GameObject:
   m_ObjectHideFlags: 0

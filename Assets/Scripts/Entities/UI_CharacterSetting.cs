@@ -8,7 +8,6 @@ public class UI_CharacterSetting : MonoBehaviour
 {
     [SerializeField] Image profile_bg;
     [SerializeField] Image profile;
-    [SerializeField] GameObject minimap;
     [SerializeField] GameObject settingPanel;
 
     CharacterSettingController controller;
@@ -25,8 +24,6 @@ public class UI_CharacterSetting : MonoBehaviour
 
     void PanelOpen()
     {
-        minimap.SetActive(false);
-
         profile.color = new Color32(246, 255, 155, 0);
         profile_bg.color = new Color32(255, 255, 255, 0);
 
@@ -37,8 +34,6 @@ public class UI_CharacterSetting : MonoBehaviour
 
     void PanelClose()
     {
-        minimap.SetActive(true);
-
         profile.color = new Color32(246, 255, 155, 255);
         profile_bg.color = new Color32(255, 255, 255, 50);
 
